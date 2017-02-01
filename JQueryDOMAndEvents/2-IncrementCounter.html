@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Increment Counter</title>
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js"
+            integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="
+            crossorigin="anonymous"></script>
+</head>
+<body>
+<div id="wrapper">
+</div>
+<script src="incrementCounter.js"></script>
+<script>
+    window.onload = function () {
+        increment("#wrapper");
+    }
+</script>
+<script>
+    function increment(selector) {
+        let container = $(selector);
+        let fragment = document.createDocumentFragment();
+        let textArea = $("<textarea></textarea>");
+        let incrementButton = $("<button>Increment</button>");
+        let addButton = $("<button>Add</button>");
+        let list = $('<ul>');
+
+        // value textArea starts - 0;
+        textArea.val(0);
+        textArea.addClass("counter");
+        //disabled Atribute
+        textArea.attr("disabled", true);
+        //prawim gi na butoni
+        incrementButton.addClass("btn");
+        incrementButton.attr("id", "incrementBtn");
+        addButton.addClass("btn");
+        addButton.attr("id", "addBtn");
+        list.addClass("results");
+
+        incrementButton.on('click', function () {
+            let value = Number(textArea.val());
+            textArea.val(++value);
+        });
+        addButton.on('click', function () {
+            // za na edin red bez bulet otpred - list.append(Number(textArea.val()));
+
+            let value = Number(textArea.val());
+            let li = $("<li>");
+            li.text(value);
+            list.append(li);
+        });
+        textArea.appendTo(fragment);
+        incrementButton.appendTo(fragment);
+        addButton.appendTo(fragment);
+        list.appendTo(fragment);
+        container.append(fragment);
+    }
+
+
+</script>
+</body>
+</html>
